@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/xkcd-grabber
+xkcd-grabber.so
+xkcd-grabber.dylib
+xkcd-grabber.dll
+xkcd-grabber.a
+xkcd-grabber.lib
+xkcd-grabber-test-*
+*.exe
+*.o
+*.obj
+*.lst

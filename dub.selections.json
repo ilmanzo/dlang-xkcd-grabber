@@ -1,0 +1,11 @@
+{
+	"fileVersion": 1,
+	"versions": {
+		"cli-d": "0.1.1",
+		"hunt": "1.6.1",
+		"hunt-extra": "1.0.0",
+		"hunt-http": "0.6.0",
+		"hunt-net": "0.5.0",
+		"hunt-openssl": "1.0.1"
+	}
+}
