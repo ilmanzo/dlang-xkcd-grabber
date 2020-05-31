@@ -4,12 +4,10 @@
 	],
 	"copyright": "Copyright © 2020, Andrea Manzini",
 	"dependencies": {
-		"cli-d": "~>0.1.1"
+		"cli-d": "~>0.1.1",
+    "requests": "~>1"
 	},
 	"description": "hunt-http test client that grabs latest xkcd comic",
-	"libs": [
-		"curl"
-	],
 	"license": "proprietary",
 	"name": "xkcd-grabber"
 }

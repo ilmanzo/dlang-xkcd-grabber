@@ -1,6 +1,6 @@
 module xkcdclient;
 
-import std.net.curl : get;
+import requests;
 import std.json;
 import std.conv;
 import std.format : format;
@@ -29,7 +29,7 @@ private:
 
     JSONValue jdata;
     enum LATEST_COMIC = -1;
-    enum baseURL = "http://xkcd.com";
+    enum baseURL = "https://xkcd.com";
 
     string fetchJSON(int comicnumber = LATEST_COMIC)
     {
@@ -38,7 +38,7 @@ private:
             url = format!"%s/info.0.json"(baseURL);
         else
             url = format!"%s/%d/info.0.json"(baseURL, comicnumber);
-        return std.conv.to!string(get(url)); // convert from char[] (mutable) to string (immutable)
+        return to!string(getContent(url)); 
     }
 
 }
