@@ -4,6 +4,10 @@ import requests;
 import std.json;
 import std.conv;
 import std.format : format;
+import std.stdio;
+import std.array : split;
+
+enum LATEST_COMIC = -1;
 
 class XKCDClient
 {
@@ -17,18 +21,42 @@ public:
 
     @property auto safe_title()
     {
-        return jdata["safe_title"];
+        return jdata["safe_title"].get!string;
+    }
+
+    @property auto alt()
+    {
+        return jdata["alt"].get!string;
     }
 
     @property auto date()
     {
-        return format!"%s-%s-%s"(jdata["day"], jdata["month"], jdata["year"]);
+        return format!"%s-%s-%s"(jdata["day"].get!string,jdata["month"].get!string,jdata["year"].get!string);
+    }
+
+    //infers filename from img url and return it
+    string saveToDisk()
+    {
+        Request rq = Request();
+        auto imgurl=jdata["img"].get!string;
+        auto filename=split(imgurl,"/")[$-1]; // $ is the array length, -1 is the latest element
+        rq.useStreaming = true;
+        auto rs = rq.get(imgurl);
+        auto stream = rs.receiveAsRange();
+        File file = File(filename, "wb");
+        while (!stream.empty)
+        {
+            file.rawWrite(stream.front);
+            stream.popFront;
+        }
+        file.close();
+        return filename;
     }
 
 private:
 
     JSONValue jdata;
-    enum LATEST_COMIC = -1;
+
     enum baseURL = "https://xkcd.com";
 
     string fetchJSON(int comicnumber = LATEST_COMIC)
@@ -38,7 +66,7 @@ private:
             url = format!"%s/info.0.json"(baseURL);
         else
             url = format!"%s/%d/info.0.json"(baseURL, comicnumber);
-        return to!string(getContent(url)); 
+        return to!string(getContent(url));
     }
 
 }
