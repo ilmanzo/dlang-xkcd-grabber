@@ -1,5 +1,5 @@
 # xkcd-grabber
-a simple CLI tool to grab XKCD comics
+a simple CLI tool to grab XKCD comics, written in [D programming language](https://dlang.org/)
 
 inspired from
 https://eryb.space/2020/05/27/diving-into-go-by-building-a-cli-applica
